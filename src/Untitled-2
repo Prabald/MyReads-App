@@ -1,0 +1,26 @@
+<BookShelf shelfchange={this.props.shelfchange} books={notPresent} shelf='Search Results'/>
+                 <BookShelf shelfchange={this.props.shelfchange} books={currentBooks} shelf='Currently Reading'/>
+                <BookShelf shelfchange={this.props.shelfchange} books={wantToRead} shelf='Want To Read'/>
+                <BookShelf shelfchange={this.props.shelfchange} books={finishedBooks} shelf='Read'/>
+                
+                ----------------------
+                
+                  getBooks=(keywords)=>{
+        
+        console.log(keywords);
+         BooksAPI.search(keywords).then((books) => {
+         if(Array.isArray(books))
+         {
+             
+             if (!keywords) {
+                 console.log('hoii');
+          this.clearResults();
+        }
+            else
+            {
+                this.setState({ found: books, keywords: keywords.trim() })
+            }
+        
+        }
+      }).catch(()=>{this.clearResults()})
+    }
